@@ -9,7 +9,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: true,
     logo: null,
-    typeId: null,
+    typeId: 'Crossover',
   },
   {
     brand: 'Porsche',
@@ -21,7 +21,7 @@ module.exports.cars = [
     gear_type: 'Manual',
     new: true,
     logo: null,
-    typeId: null,
+    typeId: 'Sport',
   },
   {
     brand: 'Tesla',
@@ -33,7 +33,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: true,
     logo: null,
-    typeId: null,
+    typeId: 'Passenger car',
   },
   {
     brand: 'Audi',
@@ -45,7 +45,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: false,
     logo: null,
-    typeId: null,
+    typeId: 'Jeep',
   },
   {
     brand: 'Mercedes-Benz',
@@ -57,7 +57,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: false,
     logo: null,
-    typeId: null,
+    typeId: 'Passenger car',
   },
   {
     brand: 'Ford',
@@ -69,7 +69,7 @@ module.exports.cars = [
     gear_type: 'Manual',
     new: true,
     logo: null,
-    typeId: null,
+    typeId: 'Sport',
   },
   {
     brand: 'Honda',
@@ -81,7 +81,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: true,
     logo: null,
-    typeId: null,
+    typeId: 'Passenger car',
   },
   {
     brand: 'Chevrolet',
@@ -93,7 +93,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: false,
     logo: null,
-    typeId: null,
+    typeId: 'Jeep',
   },
   {
     brand: 'Lexus',
@@ -105,7 +105,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: false,
     logo: null,
-    typeId: null,
+    typeId: 'Crossover',
   },
   {
     brand: 'Nissan',
@@ -117,7 +117,7 @@ module.exports.cars = [
     gear_type: 'Automatic',
     new: true,
     logo: null,
-    typeId: null,
+    typeId: 'Passenger car',
   },
 ];
 
