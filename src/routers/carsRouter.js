@@ -15,6 +15,9 @@ router
   .get(paginate, CarController.getAllCars)
   .post(uploadLogos.single('logo'), validateCar, CarController.createCar);
 
+router.get('/by-brand', CarController.getCarByBrand);
+router.get('/by-color', CarController.getCarByColor);
+
 router
   .route('/:id')
   .get(CarController.getCarById)

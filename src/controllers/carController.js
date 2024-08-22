@@ -59,6 +59,60 @@ class CarController {
     }
   }
 
+  async getCarByBrand(req, res, next) {
+    try {
+      const { brand } = req.query;
+
+      if (!brand) {
+        return next(createError(400, 'Brand parameter is required'));
+      }
+
+      const carByBrand = await Car.find(
+        {
+          brand: { $eq: brand },
+        },
+        'brand model year color engine_type bodywork_type gear_type new logo -_id'
+      );
+
+      if (carByBrand.length > 0) {
+        res.status(200).json(carByBrand);
+      } else {
+        console.log('No cars found');
+        next(createError(404, 'No cars found'));
+      }
+    } catch (error) {
+      console.log(error.message);
+      next(error);
+    }
+  }
+
+  async getCarByColor(req, res, next) {
+    try {
+      const { color } = req.query;
+
+      if (!color) {
+        return next(createError(400, 'Color parameter is required'));
+      }
+
+      const carByColor = await Car.find(
+        {
+          color: { $eq: color },
+        },
+        'brand model year color engine_type bodywork_type gear_type new logo -_id'
+      );
+
+      if (carByColor.length > 0) {
+        res.status(200).json(carByColor);
+      } else {
+        console.log('No cars found');
+        next(createError(404, 'No cars found'));
+      }
+    } catch (error) {
+      console.log(error.message);
+      next(error);
+    }
+  }
+
   createCar = async (req, res, next) => {
     try {
       const { body, file } = req;
