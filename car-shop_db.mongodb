@@ -6,30 +6,33 @@ use('car-shop');
 
 // ==== ID`s of types =====
 
-// "$oid": "66c7383405248d556dd75829"
-// "type": "Passenger car"
-
-// "$oid": "66c7383405248d556dd75828"
-// "type": "Truck"
-
-// "$oid": "66c7383405248d556dd7582c"
-// "type": "Sport"
-
-// "$oid": "66c7383405248d556dd7582d"
-// "type": "Military"
-
-// "$oid": "66c7383405248d556dd7582e"
-// "type": "Concept"
-
-// "$oid": "66c7383405248d556dd7582a"
-// "type": "Jeep"
-
-// "$oid": "66c7383405248d556dd7582b"
+// "$oid": "66c74bb01021f1bb8185823f"
 // "type": "Crossover"
 
 // db.cars.updateMany(
 //   { brand: 'Volvo', model: 'XC90' },
-//   { $set: { typeId: ObjectId('66c7383405248d556dd7582b') } }
+//   { $set: { typeId: ObjectId('66c74bb01021f1bb8185823f') } }
 // );
 
 // ==== Agregate pipeline ====
+
+db.cars.aggregate([
+  {
+    $lookup: {
+      from: 'types',
+      localField: 'typeId',
+      foreignField: '_id',
+      as: 'carType',
+    },
+  },
+  {
+    $project: {
+      brand: 1,
+      model: 1,
+      carType: {
+        type: 1,
+      },
+      _id: 0,
+    },
+  },
+]);
