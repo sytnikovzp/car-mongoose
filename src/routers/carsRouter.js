@@ -1,26 +1,24 @@
 const { Router } = require('express');
 // ============================
-const carController = require('../controllers/carController');
+const CarController = require('../controllers/carController');
 const {
   paginate: { paginate },
   validate: { validateCar, validatePatchCar },
   upload: { uploadLogos },
 } = require('../middlewares');
-
 // ============================
 
 const router = new Router();
 
 router
   .route('/')
-  // .get(paginate, carController.getCars)
-  // .post(uploadLogos, validateCar, carController.createCar)
-  // .put(uploadLogos, validateCar, carController.updateCar);
+  .get(paginate, CarController.getAllCars)
+  .post(uploadLogos.single('logo'), validateCar, CarController.createCar);
 
 router
   .route('/:id')
-  // .get(carController.getCarById)
-  // .patch(uploadLogos, validatePatchCar, carController.patchCar)
-  // .delete(carController.deleteCar);
+  .get(CarController.getCarById)
+  .patch(uploadLogos.single('logo'), validatePatchCar, CarController.patchCar)
+  .delete(CarController.deleteCar);
 
 module.exports = router;

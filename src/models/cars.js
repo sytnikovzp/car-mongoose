@@ -8,6 +8,7 @@ const carSchema = new Schema(
       type: String,
       unique: true,
       required: true,
+      match: /^[A-Z]\w*/g,
     },
     model: {
       type: String,
@@ -17,6 +18,8 @@ const carSchema = new Schema(
     year: {
       type: Number,
       required: true,
+      min: 1900,
+      max: 2024,
       get: (value) => new Date(value, 0).getFullYear(),
       set: (value) => new Date(value, 0).getFullYear(),
     },

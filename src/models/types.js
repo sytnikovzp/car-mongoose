@@ -8,6 +8,7 @@ const typeSchema = new Schema(
       type: String,
       unique: true,
       required: true,
+      match: /^[A-Z]\w*/g,
     },
   },
   {

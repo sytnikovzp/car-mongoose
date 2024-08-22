@@ -12,6 +12,7 @@ class TypeController {
           _id: 0,
         }
       ).sort({ type: 1 });
+
       if (types) {
         // console.log(`Types are: ${JSON.stringify(types, null, 2)}`);
         res.status(200).json(types);
@@ -29,6 +30,7 @@ class TypeController {
     try {
       const { id } = req.params;
       const type = await Type.findById(id, 'type -_id');
+
       if (type) {
         // console.log(`Type is: ${JSON.stringify(type, null, 2)}`);
         res.status(200).json(type);
@@ -47,6 +49,7 @@ class TypeController {
     try {
       const createdType = new Type(body);
       const savedType = await createdType.save();
+
       if (savedType) {
         console.log('Type created successfuly');
         res.status(200).json(savedType);
@@ -94,6 +97,7 @@ class TypeController {
       if (!deletedType) {
         return next(createError(404, 'Type not found!'));
       }
+
       res.sendStatus(res.statusCode);
     } catch (error) {
       console.log(error.message);

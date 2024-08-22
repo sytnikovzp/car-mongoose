@@ -1,11 +1,10 @@
 const path = require('path');
 // ============================
 const multer = require('multer');
-// ============================
 
 const { staticPath } = require('../config/staticConfig');
 
-const storageBrandLogo = multer.diskStorage({
+const storageBrandImage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.resolve(staticPath, 'images', 'logos'));
   },
@@ -14,7 +13,7 @@ const storageBrandLogo = multer.diskStorage({
   },
 });
 
-const filterBrandLogo = (req, file, cb) => {
+const filterBrandImage = (req, file, cb) => {
   const MIMETYPE_REGEXP = /^image\/(jpeg|png|gif)$/;
   if (MIMETYPE_REGEXP.test(file.mimetype)) {
     return cb(null, true);
@@ -23,6 +22,6 @@ const filterBrandLogo = (req, file, cb) => {
 };
 
 module.exports.uploadLogos = multer({
-  storage: storageBrandLogo,
-  fileFilter: filterBrandLogo,
+  storage: storageBrandImage,
+  fileFilter: filterBrandImage,
 });
