@@ -6,12 +6,20 @@ use('car-shop');
 
 // ==== ID`s of types =====
 
-// "$oid": "66c74bb01021f1bb8185823f"
+// "$oid": "66c757bc092c2ffab08aef7e"
 // "type": "Crossover"
+
+// "$oid": "66c757bc092c2ffab08aef7c"
+// "type": "Passenger car"
 
 // db.cars.updateMany(
 //   { brand: 'Volvo', model: 'XC90' },
-//   { $set: { typeId: ObjectId('66c74bb01021f1bb8185823f') } }
+//   { $set: { typeId: ObjectId('66c757bc092c2ffab08aef7e') } }
+// );
+
+// db.cars.updateMany(
+//   { brand: 'Honda', model: 'Civic' },
+//   { $set: { typeId: ObjectId('66c757bc092c2ffab08aef7c') } }
 // );
 
 // ==== Agregate pipeline ====
@@ -26,12 +34,13 @@ db.cars.aggregate([
     },
   },
   {
+    $unwind: '$carType',
+  },
+  {
     $project: {
       brand: 1,
       model: 1,
-      carType: {
-        type: 1,
-      },
+      carType: '$carType.type',
       _id: 0,
     },
   },
