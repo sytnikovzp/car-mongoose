@@ -13,8 +13,10 @@ const carSchema = new Schema(
       required: true,
     },
     year: {
-      type: Date,
+      type: Number,
       required: true,
+      get: (value) => new Date(value, 0).getFullYear(),
+      set: (value) => new Date(value, 0).getFullYear(),
     },
     color: {
       type: String,

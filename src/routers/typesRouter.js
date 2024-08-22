@@ -2,7 +2,7 @@ const { Router } = require('express');
 // ============================
 const typeController = require('../controllers/typeController');
 const {
-  // validation: { validateType, validatePatchType },
+  validate: { validateType, validatePatchType },
 } = require('../middlewares');
 // ============================
 
@@ -10,9 +10,8 @@ const router = new Router();
 
 router
   .route('/')
-  .get(typeController.getTypes)
-  .post(validateType, typeController.createType)
-  .put(validateType, typeController.updateType);
+  .get(typeController.getAllTypes)
+  .post(validateType, typeController.createType);
 
 router
   .route('/:id')

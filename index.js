@@ -13,17 +13,19 @@ app.use(express.json());
 
 app.use('/api', router);
 
-const createCars = async () => {
-  await Car.create(cars);
-};
-
-// createCars()
-
 const createTypes = async () => {
   await Type.create(types);
+  console.log('Types created successfully!');
 };
 
 // createTypes()
+
+const createCars = async () => {
+  await Car.create(cars);
+  console.log('Cars created successfully!');
+};
+
+// createCars()
 
 const PORT = process.env.PORT || 5000;
 
