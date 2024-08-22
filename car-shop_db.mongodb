@@ -1,0 +1,35 @@
+use('car-shop');
+
+// ==== For Types collection =====
+
+// db.types.find();
+
+// ==== ID`s of types =====
+
+// "$oid": "66c7383405248d556dd75829"
+// "type": "Passenger car"
+
+// "$oid": "66c7383405248d556dd75828"
+// "type": "Truck"
+
+// "$oid": "66c7383405248d556dd7582c"
+// "type": "Sport"
+
+// "$oid": "66c7383405248d556dd7582d"
+// "type": "Military"
+
+// "$oid": "66c7383405248d556dd7582e"
+// "type": "Concept"
+
+// "$oid": "66c7383405248d556dd7582a"
+// "type": "Jeep"
+
+// "$oid": "66c7383405248d556dd7582b"
+// "type": "Crossover"
+
+// db.cars.updateMany(
+//   { brand: 'Volvo', model: 'XC90' },
+//   { $set: { typeId: ObjectId('66c7383405248d556dd7582b') } }
+// );
+
+// ==== Agregate pipeline ====

@@ -6,6 +6,7 @@ const typeSchema = new Schema(
   {
     type: {
       type: String,
+      unique: true,
       required: true,
     },
   },

@@ -6,10 +6,12 @@ const carSchema = new Schema(
   {
     brand: {
       type: String,
+      unique: true,
       required: true,
     },
     model: {
       type: String,
+      unique: true,
       required: true,
     },
     year: {

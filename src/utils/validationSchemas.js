@@ -23,7 +23,7 @@ const NEW_CAR_VALIDATION_SCHEMA = yup.object().shape({
   gear_type: STRING_NULLABLE_SCHEMA,
   new: BOOLEAN_NULLABLE_SCHEMA,
   logo: STRING_NULLABLE_SCHEMA,
-  type: STRING_NULLABLE_SCHEMA,
+  typeId: STRING_NULLABLE_SCHEMA,
 });
 
 const CAR_PATCH_VALIDATION_SCHEMA = yup.object().shape({
@@ -36,7 +36,7 @@ const CAR_PATCH_VALIDATION_SCHEMA = yup.object().shape({
   gear_type: STRING_NULLABLE_SCHEMA,
   new: BOOLEAN_NULLABLE_SCHEMA,
   logo: STRING_NULLABLE_SCHEMA,
-  type: STRING_NULLABLE_SCHEMA,
+  typeId: STRING_NULLABLE_SCHEMA,
 });
 
 const NEW_TYPE_VALIDATION_SCHEMA = yup.object().shape({
