@@ -1,32 +1,53 @@
 const createError = require('http-errors');
+const mongoose = require('mongoose');
 // ============================
 const { Car, Type } = require('../models');
 
 class CarController {
   async getAllCars(req, res, next) {
     try {
-      const { limit, offset } = req.pagination;
-      const cars = await Car.find(
-        {},
-        {
-          brand: 1,
-          model: 1,
-          year: 1,
-          color: 1,
-          engine_type: 1,
-          bodywork_type: 1,
-          gear_type: 1,
-          new: 1,
-          logo: 1,
-          _id: 0,
-        }
-      )
-        .sort({ brand: 1 })
-        .limit(limit)
-        .skip(offset);
+      const limit = parseInt(req.pagination.limit, 10);
+      const offset = parseInt(req.pagination.offset, 10);
 
-      if (cars) {
-        // console.log(`Cars are: ${JSON.stringify(cars, null, 2)}`);
+      const cars = await Car.aggregate([
+        {
+          $lookup: {
+            from: 'types',
+            localField: 'typeId',
+            foreignField: '_id',
+            as: 'carType',
+          },
+        },
+        {
+          $unwind: '$carType',
+        },
+        {
+          $project: {
+            brand: 1,
+            model: 1,
+            year: 1,
+            color: 1,
+            engine_type: 1,
+            bodywork_type: 1,
+            gear_type: 1,
+            new: 1,
+            logo: 1,
+            carType: '$carType.type',
+            _id: 1,
+          },
+        },
+        {
+          $sort: { brand: 1 },
+        },
+        {
+          $skip: offset,
+        },
+        {
+          $limit: limit,
+        },
+      ]);
+
+      if (cars.length) {
         res.status(200).json(cars);
       } else {
         console.log('Any cars have not been found');
@@ -41,14 +62,41 @@ class CarController {
   async getCarById(req, res, next) {
     try {
       const { id } = req.params;
-      const car = await Car.findById(
-        id,
-        'brand model year color engine_type bodywork_type gear_type new logo -_id'
-      );
 
-      if (car) {
-        // console.log(`Car is: ${JSON.stringify(car, null, 2)}`);
-        res.status(200).json(car);
+      const car = await Car.aggregate([
+        {
+          $match: { _id: new mongoose.Types.ObjectId(id) },
+        },
+        {
+          $lookup: {
+            from: 'types',
+            localField: 'typeId',
+            foreignField: '_id',
+            as: 'carType',
+          },
+        },
+        {
+          $unwind: '$carType',
+        },
+        {
+          $project: {
+            brand: 1,
+            model: 1,
+            year: 1,
+            color: 1,
+            engine_type: 1,
+            bodywork_type: 1,
+            gear_type: 1,
+            new: 1,
+            logo: 1,
+            carType: '$carType.type',
+            _id: 0,
+          },
+        },
+      ]);
+
+      if (car.length) {
+        res.status(200).json(car[0]);
       } else {
         console.log('Car has not been found');
         next(createError(404, 'Car has not been found'));
@@ -67,12 +115,37 @@ class CarController {
         return next(createError(400, 'Brand parameter is required'));
       }
 
-      const carByBrand = await Car.find(
+      const carByBrand = await Car.aggregate([
         {
-          brand: { $eq: brand },
+          $match: { brand: { $regex: new RegExp(brand, 'i') } },
         },
-        'brand model year color engine_type bodywork_type gear_type new logo -_id'
-      );
+        {
+          $lookup: {
+            from: 'types',
+            localField: 'typeId',
+            foreignField: '_id',
+            as: 'carType',
+          },
+        },
+        {
+          $unwind: '$carType',
+        },
+        {
+          $project: {
+            brand: 1,
+            model: 1,
+            year: 1,
+            color: 1,
+            engine_type: 1,
+            bodywork_type: 1,
+            gear_type: 1,
+            new: 1,
+            logo: 1,
+            carType: '$carType.type',
+            _id: 1,
+          },
+        },
+      ]);
 
       if (carByBrand.length > 0) {
         res.status(200).json(carByBrand);
@@ -94,12 +167,39 @@ class CarController {
         return next(createError(400, 'Color parameter is required'));
       }
 
-      const carByColor = await Car.find(
+      const carByColor = await Car.aggregate([
         {
-          color: { $eq: color },
+          $match: { color: { $regex: new RegExp(color, 'i') } },
         },
-        'brand model year color engine_type bodywork_type gear_type new logo -_id'
-      );
+        {
+          $lookup: {
+            from: 'types',
+            localField: 'typeId',
+            foreignField: '_id',
+            as: 'carType',
+          },
+        },
+        {
+          $unwind: '$carType',
+        },
+        {
+          $project: {
+            brand: 1,
+            model: 1,
+            year: 1,
+            color: 1,
+            engine_type: 1,
+            bodywork_type: 1,
+            gear_type: 1,
+            new: 1,
+            logo: 1,
+            carType: '$carType.type',
+            _id: 1,
+          },
+        },
+      ]);
+
+      console.log(carByColor);
 
       if (carByColor.length > 0) {
         res.status(200).json(carByColor);

@@ -2,7 +2,7 @@ use('car-shop');
 
 // ==== For Types collection =====
 
-// db.types.find();
+db.types.find();
 
 // ==== ID`s of types =====
 
@@ -24,24 +24,24 @@ use('car-shop');
 
 // ==== Agregate pipeline ====
 
-db.cars.aggregate([
-  {
-    $lookup: {
-      from: 'types',
-      localField: 'typeId',
-      foreignField: '_id',
-      as: 'carType',
-    },
-  },
-  {
-    $unwind: '$carType',
-  },
-  {
-    $project: {
-      brand: 1,
-      model: 1,
-      carType: '$carType.type',
-      _id: 0,
-    },
-  },
-]);
+// db.cars.aggregate([
+//   {
+//     $lookup: {
+//       from: 'types',
+//       localField: 'typeId',
+//       foreignField: '_id',
+//       as: 'carType',
+//     },
+//   },
+//   {
+//     $unwind: '$carType',
+//   },
+//   {
+//     $project: {
+//       brand: 1,
+//       model: 1,
+//       carType: '$carType.type',
+//       _id: 0,
+//     },
+//   },
+// ]);
