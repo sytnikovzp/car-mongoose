@@ -1,17 +1,10 @@
 require('dotenv').config();
-const express = require('express');
-
+// ================================
+const app = require('./src/app');
 const dbMongo = require('./src/models');
 const { cars, types } = require('./src/constants');
-const router = require('./src/routers');
 
 const { Car, Type } = dbMongo;
-
-const app = express();
-
-app.use(express.json());
-
-app.use('/api', router);
 
 const createTypes = async () => {
   await Type.create(types);

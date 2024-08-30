@@ -2,7 +2,7 @@
 GET http://localhost:5000/api/types HTTP/1.1
 
 ### Get type by ID
-GET http://localhost:5000/api/types/66c72944e16558503bb31c26 HTTP/1.1
+GET http://localhost:5000/api/types/66d1991bf6be3bcb2592df75 HTTP/1.1
 
 ### Create type
 POST http://localhost:5000/api/types HTTP/1.1
