@@ -6,8 +6,8 @@ const { Car, Type } = require('../models');
 class CarController {
   async getAllCars(req, res, next) {
     try {
-      const limit = parseInt(req.pagination.limit, 10);
-      const offset = parseInt(req.pagination.offset, 10);
+      const limit = parseInt(req.pagination.limit);
+      const offset = parseInt(req.pagination.offset);
 
       const cars = await Car.aggregate([
         {
