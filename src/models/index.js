@@ -2,17 +2,7 @@ const path = require('path');
 const fs = require('fs');
 // ==========================
 const mongoose = require('mongoose');
-// ==========================
-const env = process.env.NODE_ENV || 'development';
 const basename = path.basename(__filename);
-const pathToConfig = path.resolve('src', 'config', 'mongoConfig');
-
-const config = require(pathToConfig)[env];
-
-mongoose
-  .connect(`mongodb://${config.host}:${config.port}/${config.dbName}`)
-  .then(() => console.log(`Connection to DB < ${config.dbName} > successfully!`))
-  .catch((err) => console.log(err));
 
 const dbMongo = {};
 

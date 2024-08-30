@@ -1,8 +1,23 @@
+const path = require('path');
+// ================================
 require('dotenv').config();
+const mongoose = require('mongoose');
 // ================================
 const app = require('./src/app');
 const dbMongo = require('./src/models');
 const { cars, types } = require('./src/constants');
+// ==========================
+const env = process.env.NODE_ENV || 'development';
+const pathToConfig = path.resolve('src', 'config', 'mongoConfig');
+
+const config = require(pathToConfig)[env];
+
+mongoose
+  .connect(`mongodb://${config.host}:${config.port}/${config.dbName}`)
+  .then(() =>
+    console.log(`Connection to DB < ${config.dbName} > successfully!`)
+  )
+  .catch((err) => console.log(err));
 
 const { Car, Type } = dbMongo;
 
