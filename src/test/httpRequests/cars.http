@@ -2,7 +2,7 @@
 GET http://localhost:5000/api/cars HTTP/1.1
 
 ### Get all cars (custom pagination)
-GET http://localhost:5000/api/cars?page=1&result=10 HTTP/1.1
+GET http://localhost:5000/api/cars?page=1&result=2 HTTP/1.1
 
 ### Get car by ID
 GET http://localhost:5000/api/cars/66c757c7109df3b4a355abac HTTP/1.1
